@@ -22,17 +22,19 @@ app.get('/', function (req, res) {
 });
 
 app.get('/rooms/:id', function (req, res) {
-    var room = rooms[req.params.id];
+    var roomId = req.params.id;
+    var room = rooms[roomId];
     
     if (!room) {
-        return res.redirect('/');
+        rooms[roomId] = [{ content: 'Hello [world](#)' }];
     }
     
     res.sendFile(VIEWS_DIR + '/room.html');
 });
 
 app.get('/rooms/:id/messages', function (req, res) {
-    var room = rooms[req.params.id];
+    var roomId = req.params.id;
+    var room = rooms[roomId];
     res.send(room);
 });
 
