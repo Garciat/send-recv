@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('send-recv', ['btford.socket-io']);
+var app = angular.module('send-recv', ['btford.socket-io', 'ja.qr']);
 
 app.factory('socket', function (socketFactory) {
     return socketFactory();
@@ -9,6 +9,7 @@ app.factory('socket', function (socketFactory) {
 app.controller('RoomCtrl', function ($scope, $sce, $http, $location, socket) {
     var roomId = window.location.pathname.split('/').slice(-1)[0];
     
+    $scope.qrText = window.location.toString();
     $scope.messages = [];
     $scope.editor = {
         content: ''

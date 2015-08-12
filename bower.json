@@ -7,6 +7,9 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "angular-socket-io": "~0.7.0"
+    "angular-socket-io": "~0.7.0",
+    "qrcode": "~1.0.2",
+    "angular-qr": "~0.2.0",
+    "angular": "~1.4.3"
   }
 }
