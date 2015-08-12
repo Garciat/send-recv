@@ -1,0 +1,12 @@
+{
+  "name": "send-recv",
+  "version": "1.0.0",
+  "homepage": "https://github.com/Garciat/send-recv",
+  "authors": [
+    "Gabriel Garcia <garciat@live.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angular-socket-io": "~0.7.0"
+  }
+}

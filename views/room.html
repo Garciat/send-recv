@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="send-recv">
+    <head>
+        <title>send-recv</title>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.js"></script>
+        
+        <script src="/bower_components/angular/angular.js"></script>
+        <script src="/bower_components/angular-socket-io/socket.js"></script>
+        
+        <script src="/socket.io/socket.io.js"></script>
+        
+        <script src="/room.js"></script>
+        
+        <style>
+            .main {
+                margin-top: 60px;
+            }
+            
+            .editor {
+                margin-bottom: 20px;
+            }
+            
+            .message {
+                margin-bottom: 10px;
+                padding: 15px;
+                border: 1px solid #AAA;
+            }
+            .message-content > p:last-child {
+                margin-bottom: 0;
+            }
+        </style>
+    </head>
+    <body ng-controller="RoomCtrl">
+        
+        <div class="main container">
+            <div class="editor">
+                <form ng-submit="sendMessage()">
+                    <div class="input-group">
+                        <input type="text" ng-model="editor.content" class="form-control" placeholder="Message">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Send</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="message" ng-repeat="message in messages">
+                <div class="message-content" ng-bind-html="message.htmlContent"></div>
+            </div>
+        </div>
+        
+    </body>
+</html>
