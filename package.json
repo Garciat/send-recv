@@ -1,0 +1,23 @@
+{
+  "name": "send-recv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Garciat/send-recv.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Garciat/send-recv/issues"
+  },
+  "homepage": "https://github.com/Garciat/send-recv#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
