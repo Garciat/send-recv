@@ -30,21 +30,37 @@ app.controller('RoomCtrl', function ($scope, $sce, $http, $location, socket) {
         });
     }
     
+    function sendMessage(message) {
+        $http.post('/rooms/' + roomId + '/messages', message).then(function () {
+            $scope.editor.content = '';
+            $scope.sending = false;
+        });
+    }
+    
     $scope.getSendButtonClasses = function () {
         return {
             'btn-default': !$scope.editor.content,
             'btn-primary': $scope.editor.content,
             'btn-warning': $scope.sending
         };
-    }
+    };
+    
+    $scope.acceptPaste = function (event) {
+        var items = (event.clipboardData || event.originalEvent.clipboardData).items;
+        if (items[0].type == 'text/plain') return;
+        var blob = items[0].getAsFile();
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            var dataURL = event.target.result;
+            sendMessage({ content: '![](' + dataURL + ')' });
+        };
+        reader.readAsDataURL(blob);
+    };
     
     $scope.sendMessage = function () {
         $scope.sending = true;
         
-        $http.post('/rooms/' + roomId + '/messages', $scope.editor).then(function () {
-            $scope.editor.content = '';
-            $scope.sending = false;
-        });
+        sendMessage($scope.editor);
     };
     
     socket.on('update', function () {

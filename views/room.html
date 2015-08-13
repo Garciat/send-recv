@@ -50,7 +50,8 @@
                         <input type="text"
                                class="form-control"
                                placeholder="Message"
-                               ng-model="editor.content">
+                               ng-model="editor.content"
+                               ng-paste="acceptPaste($event)">
                         
                         <span class="input-group-btn">
                             <button class="btn" ng-class="getSendButtonClasses()" ng-disabled="sending || !editor.content">Send</button>
