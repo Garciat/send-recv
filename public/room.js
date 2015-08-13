@@ -31,6 +31,8 @@ app.controller('RoomCtrl', function ($scope, $sce, $http, $location, socket) {
     }
     
     function sendMessage(message) {
+        $scope.sending = true;
+        
         $http.post('/rooms/' + roomId + '/messages', message).then(function () {
             $scope.editor.content = '';
             $scope.sending = false;
@@ -58,8 +60,6 @@ app.controller('RoomCtrl', function ($scope, $sce, $http, $location, socket) {
     };
     
     $scope.sendMessage = function () {
-        $scope.sending = true;
-        
         sendMessage($scope.editor);
     };
     
