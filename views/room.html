@@ -31,9 +31,13 @@
                 margin-bottom: 10px;
                 padding: 15px;
                 border: 1px solid #AAA;
+                border-radius: 4px;
             }
             .message-content > p:last-child {
                 margin-bottom: 0;
+            }
+            .message-content img {
+                max-width: 100%;
             }
         </style>
     </head>
@@ -49,7 +53,7 @@
                                ng-model="editor.content">
                         
                         <span class="input-group-btn">
-                            <button class="btn btn-default" ng-disabled="sending || !editor.content">Send</button>
+                            <button class="btn" ng-class="getSendButtonClasses()" ng-disabled="sending || !editor.content">Send</button>
                         </span>
                     </div>
                 </form>

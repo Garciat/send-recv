@@ -30,6 +30,14 @@ app.controller('RoomCtrl', function ($scope, $sce, $http, $location, socket) {
         });
     }
     
+    $scope.getSendButtonClasses = function () {
+        return {
+            'btn-default': !$scope.editor.content,
+            'btn-primary': $scope.editor.content,
+            'btn-warning': $scope.sending
+        };
+    }
+    
     $scope.sendMessage = function () {
         $scope.sending = true;
         
