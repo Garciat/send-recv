@@ -43,9 +43,13 @@
             <div class="editor">
                 <form ng-submit="sendMessage()">
                     <div class="input-group">
-                        <input type="text" ng-model="editor.content" class="form-control" placeholder="Message">
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Message"
+                               ng-model="editor.content">
+                        
                         <span class="input-group-btn">
-                            <button class="btn btn-default">Send</button>
+                            <button class="btn btn-default" ng-disabled="sending || !editor.content">Send</button>
                         </span>
                     </div>
                 </form>

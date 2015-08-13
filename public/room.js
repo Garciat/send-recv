@@ -14,6 +14,7 @@ app.controller('RoomCtrl', function ($scope, $sce, $http, $location, socket) {
     $scope.editor = {
         content: ''
     };
+    $scope.sending = false;
     
     function parseMessage(rawMessage) {
         var parsed = marked(rawMessage.content);
@@ -30,8 +31,11 @@ app.controller('RoomCtrl', function ($scope, $sce, $http, $location, socket) {
     }
     
     $scope.sendMessage = function () {
+        $scope.sending = true;
+        
         $http.post('/rooms/' + roomId + '/messages', $scope.editor).then(function () {
             $scope.editor.content = '';
+            $scope.sending = false;
         });
     };
     
