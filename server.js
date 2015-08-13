@@ -41,9 +41,13 @@ app.get('/rooms/:id/messages', function (req, res) {
 app.post('/rooms/:id/messages', bodyParser.json(), function (req, res) {
     var roomId = req.params.id;
     var room = rooms[roomId];
+    
     room.push(req.body);
-    res.send();
+    
+    // broadcast update to room
     io.to(roomId).emit('update');
+    
+    res.send();
 });
 
 io.on('connection', function (socket) {
