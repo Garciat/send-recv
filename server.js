@@ -9,9 +9,7 @@ var io = require('socket.io')(server);
 var MAX_ROOM_ID = 1000000;
 var VIEWS_DIR = __dirname + '/views';
 
-var rooms = {
-    
-};
+var rooms = { };
 
 app.get('/', function (req, res) {
     var roomId = Math.floor(MAX_ROOM_ID * Math.random());

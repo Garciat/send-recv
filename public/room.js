@@ -37,6 +37,36 @@ app.controller('RoomCtrl', function ($scope, $sce, $http, $location, socket) {
         });
     }
     
+    function blobToDataURL(blob) {
+        return new Promise(function (resolve, reject) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var dataURL = event.target.result;
+                resolve(dataURL);
+            };
+            reader.readAsDataURL(blob);
+        });
+    }
+    
+    function loadImage(url) {
+        return new Promise(function (resolve, reject) {
+            var image = new Image();
+            image.onload = function(event) {
+                resolve(image);
+            };
+            image.src = url;
+        });
+    }
+    
+    function downscaleImage(source) {
+        var canvas = document.createElement('canvas');
+        canvas.width = source.width;
+        canvas.height = source.height;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(source, 0, 0);
+        return canvas.toDataURL('image/webp', 0.2);
+    }
+    
     $scope.getSendButtonClasses = function () {
         return {
             'btn-default': !$scope.editor.content,
@@ -47,14 +77,17 @@ app.controller('RoomCtrl', function ($scope, $sce, $http, $location, socket) {
     
     $scope.acceptPaste = function (event) {
         var items = (event.clipboardData || event.originalEvent.clipboardData).items;
+        
         if (items[0].type == 'text/plain') return;
+        
         var blob = items[0].getAsFile();
-        var reader = new FileReader();
-        reader.onload = function(event) {
-            var dataURL = event.target.result;
+        
+        blobToDataURL(blob)
+        .then(loadImage)
+        .then(downscaleImage)
+        .then(function (dataURL) {
             sendMessage({ content: '![](' + dataURL + ')' });
-        };
-        reader.readAsDataURL(blob);
+        })
     };
     
     $scope.sendMessage = function () {
