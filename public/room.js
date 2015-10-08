@@ -17,9 +17,12 @@ app.controller('RoomCtrl', function ($scope, $sce, $http, $location, socket) {
     $scope.sending = false;
     
     function parseMessage(rawMessage) {
-        var parsed = marked(rawMessage.content);
+        var content = rawMessage.content;
+        var parsed = marked(content);
         
         return {
+            isURL: content.indexOf('http') >= 0,
+            content: content,
             htmlContent: $sce.trustAsHtml(parsed)
         };
     }

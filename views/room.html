@@ -39,6 +39,11 @@
             .message-content img {
                 max-width: 100%;
             }
+            .message-qr {
+                margin-top: 10px;
+                padding-top: 10px;
+                border-top: 1px solid #AAA;
+            }
         </style>
     </head>
     <body ng-controller="RoomCtrl">
@@ -62,6 +67,9 @@
             
             <div class="message" ng-repeat="message in messages">
                 <div class="message-content" ng-bind-html="message.htmlContent"></div>
+                <div class="message-qr" ng-if="message.isURL">
+                    <qr text="message.content"></qr>
+                </div>
             </div>
             
             <div class="text-center">
