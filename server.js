@@ -58,7 +58,10 @@ io.on('connection', function (socket) {
 app.use(express.static(__dirname + '/public'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
-server.listen(process.env.PORT || 8080, function () {
+var port = process.env.PORT || 5000;
+var ip   = process.env.IP || '127.0.0.1';
+
+server.listen(port, ip, function () {
     var addr = server.address();
     console.log('listening %s:%s', addr.address, addr.port);
 });
